@@ -9,8 +9,34 @@ import SwiftUI
 import RealityKit
 
 struct ContentView : View {
+    @State var title = "Open Talk"
+    @State var dictations: [String] = ["Test", "Test1"]
+    
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+//        ARViewContainer().edgesIgnoringSafeArea(.all)
+        
+        VStack {
+            Text(title).font(.title).bold()
+            
+            List {
+                ForEach(dictations, id: \.self) {
+                    Text($0)
+                }
+            }
+            
+            HStack {
+                Spacer()
+                Button("Start") {
+                    title = "Starting"
+                }.buttonStyle(.bordered)
+                Spacer()
+                Button("Stop") {
+                    title = "Open Talk"
+                    dictations = []
+                }.buttonStyle(.bordered)
+                Spacer()
+            }
+        }
     }
 }
 

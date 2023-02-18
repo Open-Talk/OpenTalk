@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		211DA31D29A0B11400093E2C /* APIConnection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = APIConnection; path = ../APIConnection; sourceTree = "<group>"; };
 		214AD76329A0B0C80069DCA6 /* OpenTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		214AD76629A0B0C80069DCA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		214AD76829A0B0C80069DCA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +38,7 @@
 		214AD75A29A0B0C70069DCA6 = {
 			isa = PBXGroup;
 			children = (
+				211DA31D29A0B11400093E2C /* APIConnection */,
 				214AD76529A0B0C80069DCA6 /* OpenTalk */,
 				214AD76429A0B0C80069DCA6 /* Products */,
 			);
