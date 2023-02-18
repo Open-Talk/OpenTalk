@@ -10,7 +10,9 @@ import RealityKit
 
 struct ContentView : View {
     @State var title = "Open Talk"
-    @State var dictations: [String] = ["Test", "Test1"]
+    @State var dictations: [String] = []
+    
+    @StateObject var sr = SpeechRecognizer()
     
     var body: some View {
 //        ARViewContainer().edgesIgnoringSafeArea(.all)
@@ -28,10 +30,19 @@ struct ContentView : View {
                 Spacer()
                 Button("Start") {
                     title = "Starting"
+                    
+                    sr.reset()
+                    sr.transcribe()
+                    sr.addHandle {
+                        print("main")
+                        dictations.append($0)
+                    }
+                    
                 }.buttonStyle(.bordered)
                 Spacer()
                 Button("Stop") {
                     title = "Open Talk"
+                    sr.stopTranscribing()
                     dictations = []
                 }.buttonStyle(.bordered)
                 Spacer()
