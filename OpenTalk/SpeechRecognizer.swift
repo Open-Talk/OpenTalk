@@ -10,6 +10,8 @@ import Foundation
 import Speech
 import SwiftUI
 
+typealias Handler = ([String], Bool) -> ()
+
 class SpeechRecognizer: ObservableObject {
     enum RecognizerError: Error {
         case nilRecognizer
@@ -34,9 +36,10 @@ class SpeechRecognizer: ObservableObject {
     private var task: SFSpeechRecognitionTask?
     private let recognizer: SFSpeechRecognizer?
     
-    private var handler: ((String) -> ())?
+    private var handler: Handler?
+    private var lastTranscription = Date()
     
-    init(handle: ((String) -> ())? = nil) {
+    init(handle: Handler? = nil) {
         recognizer = SFSpeechRecognizer()
         handler = handle
         Task(priority: .background) {
@@ -61,13 +64,18 @@ class SpeechRecognizer: ObservableObject {
     }
     
     func transcribe() {
+        if let recognitionTask = self.task {
+            recognitionTask.cancel()
+            self.task = nil
+        }
+
         guard let recognizer = self.recognizer, recognizer.isAvailable else {
             self.speakError(RecognizerError.recognizerIsUnavailable)
             return
         }
         
         do {
-            let (audioEngine, request) = try Self.prepareEngine()
+            let (audioEngine, request) = try prepareEngine()
             self.audioEngine = audioEngine
             self.request = request
             self.task = recognizer.recognitionTask(with: request, resultHandler: self.recognitionHandler(result:error:))
@@ -77,12 +85,19 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
-    func addHandle(handle: @escaping (String) -> ()) {
+    func addHandle(handle: @escaping Handler) {
         handler = handle
     }
     
     func stopTranscribing() {
         reset()
+    }
+    
+    func resetTranscription() {
+        reset()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.transcribe()
+        }
     }
     
     func reset() {
@@ -93,11 +108,11 @@ class SpeechRecognizer: ObservableObject {
         task = nil
     }
     
-    private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
+    private func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
         let audioEngine = AVAudioEngine()
         
-        let request = SFSpeechAudioBufferRecognitionRequest()
-        request.shouldReportPartialResults = true
+        self.request = SFSpeechAudioBufferRecognitionRequest()
+        self.request!.shouldReportPartialResults = true
         
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
@@ -105,31 +120,42 @@ class SpeechRecognizer: ObservableObject {
         let inputNode = audioEngine.inputNode
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-            request.append(buffer)
+        inputNode.installTap(onBus: 0, bufferSize: 512, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.request!.append(buffer)
         }
         audioEngine.prepare()
         try audioEngine.start()
         
-        return (audioEngine, request)
+        return (audioEngine, self.request!)
     }
     
     private func recognitionHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         let receivedFinalResult = result?.isFinal ?? false
         let receivedError = error != nil
         
-        if (result != nil && handler != nil && !receivedError && task != nil) {
-            print("rec")
-            handler!(result!.bestTranscription.formattedString)
-        }
+        self.lastTranscription = Date()
         
         if receivedFinalResult || receivedError {
             audioEngine?.stop()
             audioEngine?.inputNode.removeTap(onBus: 0)
         }
+
+        if let result = result, let handler = handler, !receivedError, task != nil {
+            handler(result.bestTranscription.segments.map { $0.substring }, result.isFinal)
+        }
         
         if let result = result {
             speak(result.bestTranscription.formattedString)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if (Date() - self.lastTranscription) > 1 {
+                print(Date() - self.lastTranscription)
+                
+                if self.task != nil {
+                    self.handler?(result?.bestTranscription.segments.map { $0.substring } ?? [], true)
+                }
+            }
         }
     }
     

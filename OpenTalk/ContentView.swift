@@ -8,9 +8,24 @@
 import SwiftUI
 import RealityKit
 
+extension Date {
+
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+
+}
+
 struct ContentView : View {
+    struct Dictation: Hashable {
+        let time: Date
+        let text: String
+        let marker: Int
+        let user: String
+    }
+    
     @State var title = "Open Talk"
-    @State var dictations: [String] = []
+    @State var dictations: [Dictation] = []
     
     @StateObject var sr = SpeechRecognizer()
     @State var openAR: Bool = false
@@ -18,11 +33,15 @@ struct ContentView : View {
     var body: some View {
         VStack {
             HStack {
+                Spacer()
                 Text(title).font(.title).bold()
                 Spacer()
-                Button("Toggle AR Mode") {
+                Button(action: {
                     openAR = !openAR
+                }) {
+                    Label("AR Mode", systemImage: "sparkles.tv.fill")
                 }
+                Spacer()
             }
             if openAR {
                 ARViewContainer().edgesIgnoringSafeArea(.all)
@@ -30,29 +49,47 @@ struct ContentView : View {
                 VStack {
                     List {
                         ForEach(dictations, id: \.self) {
-                            Text($0)
+                            Text(($0.user == "user" ? "User: " : "Remote: ") + $0.text)
                         }
                     }
                 }
             }
             HStack {
                 Spacer()
-                Button("Start") {
-                    title = "Listening"
-                    
+                Button(action: {
+                    title = "Listening..."
                     sr.reset()
                     sr.transcribe()
                     sr.addHandle {
-                        print("main")
-                        dictations.append($0)
+                        (text, isFinal) -> () in
+                        let last = dictations.last { $0.user == "user" }
+                        let idx = dictations.lastIndex { $0.user == "user" }
+                        let current = Date()
+                        if let last = last {
+                            if (!isFinal) {
+                                print(text)
+                                print(last.marker)
+                                if let idx = idx { dictations.remove(at: idx) }
+                                
+                                dictations.append(Dictation(time: Date(), text: Array(text.suffix(from: last.marker)).joined(separator: " "), marker: last.marker, user: "user"))
+                            } else {
+                                dictations.append(Dictation(time: Date(), text: "", marker: text.count, user: "user"))
+                            }
+                        } else {
+                            dictations.append(Dictation(time: Date(), text: String(text.joined(separator: " ")), marker: 0, user: "user"))
+                        }
                     }
-                    
+                }) {
+                    Label("Start", systemImage: "play.circle")
+                }.buttonStyle(.bordered)
                 Spacer()
-                Button("Stop") {
+                Button(role: .destructive, action: {
                     title = "Open Talk"
                     sr.stopTranscribing()
                     dictations = []
-                }.buttonStyle(.bordered)
+                }) {
+                    Label("Stop", systemImage: "stop.circle")
+                }.buttonStyle(.bordered).buttonStyle(.bordered)
                 Spacer()
             }
         }

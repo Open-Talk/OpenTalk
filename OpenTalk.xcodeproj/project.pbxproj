@@ -14,6 +14,7 @@
 		214AD76B29A0B0C80069DCA6 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 214AD76A29A0B0C80069DCA6 /* Experience.rcproject */; };
 		214AD76D29A0B0C90069DCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214AD76C29A0B0C90069DCA6 /* Assets.xcassets */; };
 		214AD77029A0B0C90069DCA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214AD76F29A0B0C90069DCA6 /* Preview Assets.xcassets */; };
+		2173F67B29A139A40075A23F /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173F67A29A139A40075A23F /* StartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		214AD76A29A0B0C80069DCA6 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		214AD76C29A0B0C90069DCA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		214AD76F29A0B0C90069DCA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2173F67A29A139A40075A23F /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				214AD76C29A0B0C90069DCA6 /* Assets.xcassets */,
 				214AD76E29A0B0C90069DCA6 /* Preview Content */,
 				211DA31E29A0B58B00093E2C /* SpeechRecognizer.swift */,
+				2173F67A29A139A40075A23F /* StartView.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				214AD76929A0B0C80069DCA6 /* ContentView.swift in Sources */,
+				2173F67B29A139A40075A23F /* StartView.swift in Sources */,
 				211DA31F29A0B58B00093E2C /* SpeechRecognizer.swift in Sources */,
 				214AD76729A0B0C80069DCA6 /* AppDelegate.swift in Sources */,
 				214AD76B29A0B0C80069DCA6 /* Experience.rcproject in Sources */,
@@ -290,7 +294,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = 2CL6FZA46J;
+				DEVELOPMENT_TEAM = QG25EZWXDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -325,7 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = 2CL6FZA46J;
+				DEVELOPMENT_TEAM = QG25EZWXDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
