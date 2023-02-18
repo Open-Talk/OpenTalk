@@ -48,7 +48,18 @@ struct ContentView : View {
                 Spacer()
             }
             if openAR {
-                arView
+                ZStack {
+                    arView
+                    dictations.last != nil ?
+                    VStack {
+                        Spacer()
+                        Text((dictations.last!.user == "user" ? "User: " : "Remote: ") + dictations.last!.text)
+                            .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                            .background(Color.black)
+                            .cornerRadius(10)
+                        Spacer().frame(height: 20)
+                    } : nil
+                }
             } else {
                 VStack {
                     List {
