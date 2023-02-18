@@ -13,23 +13,32 @@ struct ContentView : View {
     @State var dictations: [String] = []
     
     @StateObject var sr = SpeechRecognizer()
+    @State var openAR: Bool = false
     
     var body: some View {
-//        ARViewContainer().edgesIgnoringSafeArea(.all)
-        
         VStack {
-            Text(title).font(.title).bold()
-            
-            List {
-                ForEach(dictations, id: \.self) {
-                    Text($0)
+            HStack {
+                Text(title).font(.title).bold()
+                Spacer()
+                Button("Toggle AR Mode") {
+                    openAR = !openAR
                 }
             }
-            
+            if openAR {
+                ARViewContainer().edgesIgnoringSafeArea(.all)
+            } else {
+                VStack {
+                    List {
+                        ForEach(dictations, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+            }
             HStack {
                 Spacer()
                 Button("Start") {
-                    title = "Starting"
+                    title = "Listening"
                     
                     sr.reset()
                     sr.transcribe()
@@ -38,7 +47,6 @@ struct ContentView : View {
                         dictations.append($0)
                     }
                     
-                }.buttonStyle(.bordered)
                 Spacer()
                 Button("Stop") {
                     title = "Open Talk"
