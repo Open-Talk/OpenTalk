@@ -7,21 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		211DA31F29A0B58B00093E2C /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211DA31E29A0B58B00093E2C /* SpeechRecognizer.swift */; };
+		211DA32229A0BCE400093E2C /* APIConnection in Frameworks */ = {isa = PBXBuildFile; productRef = 211DA32129A0BCE400093E2C /* APIConnection */; };
 		214AD76729A0B0C80069DCA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AD76629A0B0C80069DCA6 /* AppDelegate.swift */; };
 		214AD76929A0B0C80069DCA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AD76829A0B0C80069DCA6 /* ContentView.swift */; };
 		214AD76B29A0B0C80069DCA6 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 214AD76A29A0B0C80069DCA6 /* Experience.rcproject */; };
 		214AD76D29A0B0C90069DCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214AD76C29A0B0C90069DCA6 /* Assets.xcassets */; };
 		214AD77029A0B0C90069DCA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214AD76F29A0B0C90069DCA6 /* Preview Assets.xcassets */; };
+		2173F67B29A139A40075A23F /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173F67A29A139A40075A23F /* StartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		211DA31D29A0B11400093E2C /* APIConnection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = APIConnection; path = ../APIConnection; sourceTree = "<group>"; };
+		211DA31E29A0B58B00093E2C /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		214AD76329A0B0C80069DCA6 /* OpenTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		214AD76629A0B0C80069DCA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		214AD76829A0B0C80069DCA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		214AD76A29A0B0C80069DCA6 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		214AD76C29A0B0C90069DCA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		214AD76F29A0B0C90069DCA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2173F67A29A139A40075A23F /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,18 +34,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				211DA32229A0BCE400093E2C /* APIConnection in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		211DA32029A0BCE400093E2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		214AD75A29A0B0C70069DCA6 = {
 			isa = PBXGroup;
 			children = (
 				211DA31D29A0B11400093E2C /* APIConnection */,
 				214AD76529A0B0C80069DCA6 /* OpenTalk */,
 				214AD76429A0B0C80069DCA6 /* Products */,
+				211DA32029A0BCE400093E2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +74,8 @@
 				214AD76A29A0B0C80069DCA6 /* Experience.rcproject */,
 				214AD76C29A0B0C90069DCA6 /* Assets.xcassets */,
 				214AD76E29A0B0C90069DCA6 /* Preview Content */,
+				211DA31E29A0B58B00093E2C /* SpeechRecognizer.swift */,
+				2173F67A29A139A40075A23F /* StartView.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -88,6 +104,9 @@
 			dependencies = (
 			);
 			name = OpenTalk;
+			packageProductDependencies = (
+				211DA32129A0BCE400093E2C /* APIConnection */,
+			);
 			productName = OpenTalk;
 			productReference = 214AD76329A0B0C80069DCA6 /* OpenTalk.app */;
 			productType = "com.apple.product-type.application";
@@ -143,6 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				214AD76929A0B0C80069DCA6 /* ContentView.swift in Sources */,
+				2173F67B29A139A40075A23F /* StartView.swift in Sources */,
+				211DA31F29A0B58B00093E2C /* SpeechRecognizer.swift in Sources */,
 				214AD76729A0B0C80069DCA6 /* AppDelegate.swift in Sources */,
 				214AD76B29A0B0C80069DCA6 /* Experience.rcproject in Sources */,
 			);
@@ -273,16 +294,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = 2CL6FZA46J;
+				DEVELOPMENT_TEAM = QG25EZWXDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need to be able to hear you.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need to be able to understand your speech.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,16 +329,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenTalk/Preview Content\"";
-				DEVELOPMENT_TEAM = 2CL6FZA46J;
+				DEVELOPMENT_TEAM = QG25EZWXDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need to be able to hear you.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "We need to be able to understand your speech.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,6 +378,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		211DA32129A0BCE400093E2C /* APIConnection */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = APIConnection;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 214AD75B29A0B0C70069DCA6 /* Project object */;
 }
