@@ -24,11 +24,15 @@ struct ContentView : View {
         let user: String
     }
     
-    @State var title = "Open Talk"
+    let selection: Views
+    
+    @State var title = ""
     @State var dictations: [Dictation] = []
     
     @StateObject var sr = SpeechRecognizer()
     @State var openAR: Bool = false
+    
+    var arView: some View = ARViewContainer().edgesIgnoringSafeArea(.all)
     
     var body: some View {
         VStack {
@@ -44,7 +48,7 @@ struct ContentView : View {
                 Spacer()
             }
             if openAR {
-                ARViewContainer().edgesIgnoringSafeArea(.all)
+                arView
             } else {
                 VStack {
                     List {
@@ -64,7 +68,6 @@ struct ContentView : View {
                         (text, isFinal) -> () in
                         let last = dictations.last { $0.user == "user" }
                         let idx = dictations.lastIndex { $0.user == "user" }
-                        let current = Date()
                         if let last = last {
                             if (!isFinal) {
                                 print(text)
@@ -84,7 +87,7 @@ struct ContentView : View {
                 }.buttonStyle(.bordered)
                 Spacer()
                 Button(role: .destructive, action: {
-                    title = "Open Talk"
+                    title = converter(v: selection)
                     sr.stopTranscribing()
                     dictations = []
                 }) {
@@ -92,6 +95,9 @@ struct ContentView : View {
                 }.buttonStyle(.bordered).buttonStyle(.bordered)
                 Spacer()
             }
+        }
+        .onAppear() {
+            self.title = converter(v: selection)
         }
     }
 }
@@ -116,10 +122,10 @@ struct ARViewContainer: UIViewRepresentable {
     
 }
 
-#if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-#endif
+//#if DEBUG
+//struct ContentView_Previews : PreviewProvider {
+//    static var previews: some View {
+//        ContentView(view: .Interview)
+//    }
+//}
+//#endif
