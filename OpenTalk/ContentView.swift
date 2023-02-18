@@ -5,6 +5,7 @@
 //  Created by Omar Elamri on 2/17/23.
 //
 
+import APIConnection
 import SwiftUI
 import RealityKit
 
@@ -62,9 +63,15 @@ struct ContentView : View {
                 }
             } else {
                 VStack {
-                    List {
-                        ForEach(dictations, id: \.self) {
-                            Text(($0.user == "user" ? "User: " : "Remote: ") + $0.text)
+                    if dictations.last != nil {
+                        List {
+                            ForEach(dictations, id: \.self) {
+                                Text(($0.user == "user" ? "User: " : "Remote: ") + $0.text)
+                            }
+                        }
+                    } else {
+                        List {
+                            Text("Tap Start to speak")
                         }
                     }
                 }

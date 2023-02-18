@@ -5,12 +5,8 @@
 //  Created by Omar Elamri on 2/18/23.
 //
 
+import APIConnection
 import SwiftUI
-
-enum Views: String {
-    case Interview
-    case OrderCoffee
-}
 
 func converter(v: Views) -> String {
     switch (v) {
