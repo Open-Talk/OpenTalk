@@ -11,27 +11,36 @@ import RealityKit
 struct ContentView : View {
     @State var title = "Open Talk"
     @State var dictations: [String] = ["Test", "Test1"]
+    @State var openAR: Bool = false
     
     var body: some View {
-//        ARViewContainer().edgesIgnoringSafeArea(.all)
-        
         VStack {
-            Text(title).font(.title).bold()
-            
-            List {
-                ForEach(dictations, id: \.self) {
-                    Text($0)
+            HStack {
+                Text(title).font(.title).bold()
+                Spacer()
+                Button("Toggle AR Mode") {
+                    openAR = !openAR
                 }
             }
-            
+            if openAR {
+                ARViewContainer().edgesIgnoringSafeArea(.all)
+            } else {
+                VStack {
+                    List {
+                        ForEach(dictations, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+            }
             HStack {
                 Spacer()
                 Button("Start") {
-                    title = "Starting"
+                    title = "Listening..."
                 }.buttonStyle(.bordered)
                 Spacer()
                 Button("Stop") {
-                    title = "Open Talk"
+                    title = "Press Start to Listen"
                     dictations = []
                 }.buttonStyle(.bordered)
                 Spacer()
