@@ -39,6 +39,8 @@ struct ContentView : View {
     
     var arView: some View = ARViewContainer().edgesIgnoringSafeArea(.all)
     
+    let ARCaptions = UserDefaults.standard.bool(forKey: "ARCaptions")
+    
     var body: some View {
         VStack {
             HStack {
@@ -58,11 +60,13 @@ struct ContentView : View {
                     dictations.last != nil ?
                     VStack {
                         Spacer()
-                        Text((dictations.last!.user == "user" ? "User: " : "Remote: ") + dictations.last!.text)
-                            .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
-                            .background(Color.black)
-                            .cornerRadius(10)
-                        Spacer().frame(height: 20)
+                        if ARCaptions {
+                            Text((dictations.last!.user == "user" ? "User: " : "Remote: ") + dictations.last!.text)
+                                .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                .background(Color.black)
+                                .cornerRadius(10)
+                            Spacer().frame(height: 20)
+                        }
                     } : nil
                 }
             } else {

@@ -15,6 +15,7 @@ func converter(v: Views) -> String {
     case .Conversation: return "Free Conversation"
     case .Skins: return "Skins"
     case .Voices: return "Voices"
+    case .Settings: return "App Settings"
     }
 }
 
@@ -59,6 +60,12 @@ struct StartView : View {
                         NavigationLink(converter(v: .Skins), value: Views.Skins)
                         NavigationLink(converter(v: .Voices), value: Views.Voices)
                     }
+                    
+                    Section(header: Text("Settings").bold()) {
+                        NavigationLink(converter(v: .Settings), value: Views.Settings)
+                        Link("Device Settings", destination: URL(string: UIApplication.openSettingsURLString)!)
+                        
+                    }
                 }
                 .navigationDestination(for: Views.self) { view in
                     
@@ -73,6 +80,8 @@ struct StartView : View {
                         ItemsContentView(selection: view)
                     case .Voices:
                         ItemsContentView(selection: view)
+                    case .Settings:
+                        SettingsView()
                     }
                 }
 

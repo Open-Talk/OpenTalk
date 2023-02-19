@@ -17,6 +17,7 @@
 		2173F67B29A139A40075A23F /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173F67A29A139A40075A23F /* StartView.swift */; };
 		21A5707029A1E3EB007319CD /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A5706F29A1E3EB007319CD /* SpeechService.swift */; };
 		8C1DCF3B29A1D94A005A8C46 /* ItemsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1DCF3A29A1D94A005A8C46 /* ItemsContentView.swift */; };
+		8CF16E4F29A24ACC00D4D5AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF16E4E29A24ACC00D4D5AA /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		2173F67A29A139A40075A23F /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		21A5706F29A1E3EB007319CD /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		8C1DCF3A29A1D94A005A8C46 /* ItemsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContentView.swift; sourceTree = "<group>"; };
+		8CF16E4E29A24ACC00D4D5AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				2173F67A29A139A40075A23F /* StartView.swift */,
 				8C1DCF3A29A1D94A005A8C46 /* ItemsContentView.swift */,
 				21A5706F29A1E3EB007319CD /* SpeechService.swift */,
+				8CF16E4E29A24ACC00D4D5AA /* SettingsView.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				214AD76929A0B0C80069DCA6 /* ContentView.swift in Sources */,
+				8CF16E4F29A24ACC00D4D5AA /* SettingsView.swift in Sources */,
 				8C1DCF3B29A1D94A005A8C46 /* ItemsContentView.swift in Sources */,
 				2173F67B29A139A40075A23F /* StartView.swift in Sources */,
 				211DA31F29A0B58B00093E2C /* SpeechRecognizer.swift in Sources */,
