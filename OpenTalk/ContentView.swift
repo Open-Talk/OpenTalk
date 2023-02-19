@@ -35,7 +35,7 @@ struct ContentView : View {
     @StateObject var sr = SpeechRecognizer()
     @State var openAR: Bool = false
     
-    var ac = APIConnection()
+    @StateObject var ac = APIConnection()
     
     var arView: some View = ARViewContainer().edgesIgnoringSafeArea(.all)
     
