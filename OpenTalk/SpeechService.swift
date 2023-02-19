@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import APIConnection
 
 enum VoiceType: String {
     case undefined
@@ -17,7 +18,7 @@ enum VoiceType: String {
 }
 
 let ttsAPIUrl = "https://texttospeech.googleapis.com/v1beta1/text:synthesize"
-let APIKey = "AIzaSyAhn9kCXeF9bcr_jObxK9sfE3ZVFrnL4ds"
+let APIKey = APIKeys.googleAPI
 
 class SpeechService: NSObject, AVAudioPlayerDelegate {
 
