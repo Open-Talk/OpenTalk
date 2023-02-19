@@ -10,7 +10,118 @@
                 "name" : "surface"
               },
               "behaviors" : [
+                {
+                  "__content" : [
+                    {
+                      "accessibility" : {
+                        "__content" : [
+                          {
+                            "isEnabled" : false
+                          }
+                        ],
+                        "__version" : 1
+                      },
+                      "actionGroups" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurations" : [
+                                {
+                                  "__content" : [
+                                    {
+                                      "configurationBox" : {
+                                        "configuration" : {
+                                          "animationSpeed" : 1,
+                                          "audioGain" : 1,
+                                          "clipDuration" : 0,
+                                          "clipStart" : 0,
+                                          "iterations" : 1,
+                                          "multiplePerformType" : "ignore request",
+                                          "muteAudio" : false,
+                                          "reversed" : false,
+                                          "reverses" : false,
+                                          "target" : [
+                                            "BC654717-A1D4-4D2F-B4B0-5B94FB429AD7"
+                                          ]
+                                        },
+                                        "name" : {
+                                          "type" : "startAnimate"
+                                        }
+                                      },
+                                      "identifier" : "2F05CA0E-6C4A-4EAE-BABC-9209E2447D9E",
+                                      "isEnabled" : true
+                                    }
+                                  ],
+                                  "__version" : 1
+                                }
+                              ],
+                              "identifier" : "0AA1528F-1740-410C-A2C6-EA06696E1D4B",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        },
+                        {
+                          "__content" : [
+                            {
+                              "configurations" : [
+                                {
+                                  "__content" : [
+                                    {
+                                      "configurationBox" : {
+                                        "configuration" : {
+                                          "duration" : 3
+                                        },
+                                        "name" : {
+                                          "type" : "wait"
+                                        }
+                                      },
+                                      "identifier" : "4861CC53-01AC-4FA9-AE55-1E9D667C90C7",
+                                      "isEnabled" : true
+                                    }
+                                  ],
+                                  "__version" : 1
+                                }
+                              ],
+                              "identifier" : "5D8FE55F-AC77-4B91-8B3C-C256FE67B190",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ],
+                      "color" : [
+                        0.364705890417099,
+                        0.74117648601531982,
+                        0.69019609689712524,
+                        1
+                      ],
+                      "identifier" : "C63A58A9-A430-4130-AAEB-410DBE457B26",
+                      "isEnabled" : true,
+                      "isLooping" : true,
+                      "isModal" : false,
+                      "name" : "Behavior",
+                      "triggers" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurationBox" : {
+                                "configuration" : {
 
+                                },
+                                "name" : "start"
+                              },
+                              "identifier" : "A007A7FF-06D0-4FBC-9980-9E5A0F0C17A5",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ]
+                    }
+                  ],
+                  "__version" : 3
+                }
               ],
               "gravity" : [
                 0,
@@ -25,8 +136,7 @@
                   "7F5F1ADC-E5E4-4EF5-A5B5-FC43B071FFA5" : null,
                   "358C6827-CF6C-4DFB-A3E8-55B49A118C2F" : null,
                   "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
-                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
-                  "DCBD0C23-5150-4D91-8375-4FD03482C29A" : {
+                  "74062B65-BB67-461E-91CB-8038F4EC8A73" : {
                     "overrides" : {
                       "children" : {
                         "USDScene" : {
@@ -50,7 +160,7 @@
                                 "url",
                                 {
                                   "typeName" : "String",
-                                  "value" : "model:9d5eed27cb111a0c2315acbab705c018\/Sitting_person.usdz"
+                                  "value" : "model:e76b205f96d64026dd8d9ee8cc29dca7\/rabbit_animation_cute.usdz"
                                 }
                               ],
                               [
@@ -70,7 +180,7 @@
                                 "RuntimeIdentifier",
                                 {
                                   "typeName" : "UUID",
-                                  "value" : "4D82C982-A0A6-4517-919B-093C6BF279EC"
+                                  "value" : "A28F72E1-8DDD-4BD5-B3CC-A135FA659EB1"
                                 }
                               ]
                             ]
@@ -106,7 +216,7 @@
                           "RuntimeIdentifier",
                           {
                             "typeName" : "UUID",
-                            "value" : "144CA766-4F62-42EE-A469-3287F4868C4B"
+                            "value" : "BC654717-A1D4-4D2F-B4B0-5B94FB429AD7"
                           }
                         ]
                       ]
@@ -125,13 +235,17 @@
                         0,
                         1,
                         0,
-                        0,
-                        0.87958014011383057,
-                        0,
+                        0.30684882402420044,
+                        0.01830601692199707,
+                        -0.9805300235748291,
                         1
                       ]
                     }
-                  }
+                  },
+                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
+                  "C057CFB4-9CDF-45B7-A6D1-29E1CABCDBD7" : null,
+                  "C7011429-CC0E-4A5A-B42E-B5EFA808EAC8" : null,
+                  "DCBD0C23-5150-4D91-8375-4FD03482C29A" : null
                 },
                 "factory" : null,
                 "runtimeAttributes" : [
@@ -148,21 +262,21 @@
               "title" : "Box",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.23396141827106476,
-                  6.9184027395863268e-09,
-                  -0.97224593162536621,
+                  0.96838992834091187,
+                  -7.4124795190755322e-09,
+                  -0.24944142997264862,
                   0,
-                  -0.42683160305023193,
-                  0.898479163646698,
-                  -0.10271273553371429,
+                  -0.14794521033763885,
+                  0.80512410402297974,
+                  -0.57435816526412964,
                   0,
-                  0.87354260683059692,
-                  0.43901622295379639,
-                  0.21020933985710144,
+                  0.20083142817020416,
+                  0.59310644865036011,
+                  0.77967393398284912,
                   0,
-                  4.9500861167907715,
-                  2.8326313495635986,
-                  0.53986167907714844,
+                  0.56373655796051025,
+                  0.94550579786300659,
+                  1.3581280708312988,
                   1
                 ],
                 "sceneTransform" : [

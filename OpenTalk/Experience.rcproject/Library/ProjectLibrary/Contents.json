@@ -8,5 +8,10 @@
     "libraryIdentifier" : "9d5eed27cb111a0c2315acbab705c018",
     "format" : "model",
     "displayName" : "Sitting_person.usdz"
+  },
+  {
+    "libraryIdentifier" : "e76b205f96d64026dd8d9ee8cc29dca7",
+    "format" : "model",
+    "displayName" : "rabbit_animation_cute.usdz"
   }
 ]

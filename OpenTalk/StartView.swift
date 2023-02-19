@@ -10,12 +10,14 @@ import SwiftUI
 enum Views: String {
     case Interview
     case OrderCoffee
+    case Custom
 }
 
 func converter(v: Views) -> String {
     switch (v) {
     case .Interview: return "Interview"
     case .OrderCoffee: return "Ordering a Coffee"
+    case .Custom: return "Custom"
     }
 }
 
@@ -53,6 +55,7 @@ struct StartView : View {
                     Text("Choose a Scenario").bold()
                     NavigationLink(converter(v: .Interview), value: Views.Interview)
                     NavigationLink(converter(v: .OrderCoffee), value: Views.OrderCoffee)
+                    NavigationLink(converter(v: .Custom), value: Views.Custom)
                 }
                 .navigationDestination(for: Views.self) { view in
                     ContentView(selection: view)
