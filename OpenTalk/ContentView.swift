@@ -6,6 +6,7 @@
 //
 
 import APIConnection
+import AVFoundation
 import SwiftUI
 import RealityKit
 
@@ -33,6 +34,8 @@ struct ContentView : View {
     
     @StateObject var sr = SpeechRecognizer()
     @State var openAR: Bool = false
+    
+    let synth = AVSpeechSynthesizer()
     
     var ac = APIConnection()
     
@@ -87,8 +90,13 @@ struct ContentView : View {
                     title = "Listening..."
                     sr.reset()
                     sr.transcribe()
+                    
+                    try! AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+                    
                     sr.addHandle {
                         (text, isFinal) -> () in
+                        synth.stopSpeaking(at: .word)
+                        
                         let last = dictations.last { $0.user == "user" }
                         let idx = dictations.lastIndex { $0.user == "user" }
                         if let last = last {
@@ -102,10 +110,12 @@ struct ContentView : View {
                                 Task.init {
                                     print(last.text)
                                     if last.text == "" { return }
+                                    let text = try await ac.getResponse(prompt: last.text)
+                                    speak(text: text)
                                     dictations.append(
                                         Dictation(
                                             time: Date(),
-                                            text: try await ac.getResponse(prompt: last.text),
+                                            text: text,
                                             marker: 0,
                                             user: "remote" )
                                     )
@@ -121,6 +131,7 @@ struct ContentView : View {
                 Spacer()
                 Button(role: .destructive, action: {
                     if !recording { return }
+                    synth.stopSpeaking(at: .word)
                     title = converter(v: selection)
                     sr.stopTranscribing()
                     ac.reset()
@@ -135,7 +146,28 @@ struct ContentView : View {
         .onAppear() {
             self.title = converter(v: selection)
             self.ac.change(view: selection)
+            speak(text: "Test google test google test google")
         }
+    }
+    
+    func speak(text: String) {
+        // Create an utterance.
+        let utterance = AVSpeechUtterance(string: text)
+
+        // Configure the utterance.
+        utterance.rate = 0.57
+        utterance.pitchMultiplier = 0.8
+        utterance.postUtteranceDelay = 0.2
+        utterance.volume = 0.8
+
+//        // Retrieve the American English voice.
+//        let voice = AVSpeechSynthesisVoice()
+//
+//        // Assign the voice to the utterance.
+//        utterance.voice = voice
+
+        // Tell the synthesizer to speak the utterance.
+        self.synth.speak(utterance)
     }
 }
 
