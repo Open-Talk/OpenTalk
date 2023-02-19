@@ -8,11 +8,6 @@
 import APIConnection
 import SwiftUI
 
-enum Views: String {
-    case Interview
-    case OrderCoffee
-    case Custom
-}
 
 func converter(v: Views) -> String {
     switch (v) {
