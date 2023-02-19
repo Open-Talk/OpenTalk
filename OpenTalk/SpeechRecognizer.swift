@@ -115,7 +115,7 @@ class SpeechRecognizer: ObservableObject {
         self.request!.shouldReportPartialResults = true
         
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+        try audioSession.setCategory(.playAndRecord, mode: .default, options: .defaultToSpeaker)
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = audioEngine.inputNode
         
@@ -169,6 +169,37 @@ class SpeechRecognizer: ObservableObject {
             errorMessage += error.localizedDescription
         }
         transcript = "<< \(errorMessage) >>"
+    }
+}
+
+class TextToSpeech: NSObject, AVSpeechSynthesizerDelegate {
+    
+    let synth = AVSpeechSynthesizer()
+    
+    override init() {
+        super.init()
+        synth.delegate = self
+        synth.usesApplicationAudioSession = false
+    }
+    
+    func speak(text: String) {
+        // Create an utterance.
+        let utterance = AVSpeechUtterance(string: text)
+
+        // Configure the utterance.
+        utterance.rate = 0.5
+        utterance.pitchMultiplier = 0.5
+        utterance.postUtteranceDelay = 0.2
+        utterance.volume = 0.8
+
+//        // Retrieve the American English voice.
+        let voice = AVSpeechSynthesisVoice()
+//
+//        // Assign the voice to the utterance.
+        utterance.voice = voice
+
+        // Tell the synthesizer to speak the utterance.
+        self.synth.speak(utterance)
     }
 }
 

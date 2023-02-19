@@ -8,12 +8,13 @@
 import APIConnection
 import SwiftUI
 
-
 func converter(v: Views) -> String {
     switch (v) {
     case .Interview: return "Interview"
     case .OrderCoffee: return "Ordering a Coffee"
-    case .Custom: return "Custom"
+    case .Conversation: return "Free Conversation"
+    case .Skins: return "Skins"
+    case .Voices: return "Voices"
     }
 }
 
@@ -43,19 +44,44 @@ struct StartView : View {
                 HStack {
                     Spacer()
                     Image(uiImage: Bundle.main.icon ?? UIImage()).cornerRadius(10)
-                    Text("Open Talk").font(.title).bold()
+                    Text("OpenTalk").font(.title).bold()
                     Spacer()
                 }
                 
                 List {
-                    Text("Choose a Scenario").bold()
-                    NavigationLink(converter(v: .Interview), value: Views.Interview)
-                    NavigationLink(converter(v: .OrderCoffee), value: Views.OrderCoffee)
-                    NavigationLink(converter(v: .Custom), value: Views.Custom)
+                    Section(header: Text("Choose a Scenario").bold()) {
+                        NavigationLink(converter(v: .Interview), value: Views.Interview)
+                        NavigationLink(converter(v: .OrderCoffee), value: Views.OrderCoffee)
+                        NavigationLink(converter(v: .Conversation), value: Views.Conversation)
+                    }
+                    
+                    Section(header: Text("View Your Items").bold()) {
+                        NavigationLink(converter(v: .Skins), value: Views.Skins)
+                        NavigationLink(converter(v: .Voices), value: Views.Voices)
+                    }
                 }
                 .navigationDestination(for: Views.self) { view in
-                    ContentView(selection: view)
+                    
+                    switch view {
+                    case .Interview:
+                        ContentView(selection: view)
+                    case .OrderCoffee:
+                        ContentView(selection: view)
+                    case .Conversation:
+                        ContentView(selection: view)
+                    case .Skins:
+                        ItemsContentView(selection: view)
+                    case .Voices:
+                        ItemsContentView(selection: view)
+                    }
                 }
+
+//                List {
+//
+//                }
+//                .navigationDestination(for: Views.self) { view in
+//                    ItemsContentView(selection: view)
+//                }
             }
         }
     }
