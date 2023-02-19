@@ -5,6 +5,7 @@
 //  Created by Omar Elamri on 2/17/23.
 //
 
+import APIConnection
 import SwiftUI
 import RealityKit
 
@@ -28,9 +29,12 @@ struct ContentView : View {
     
     @State var title = ""
     @State var dictations: [Dictation] = []
+    @State var recording = false
     
     @StateObject var sr = SpeechRecognizer()
     @State var openAR: Bool = false
+    
+    var ac = APIConnection()
     
     var arView: some View = ARViewContainer().edgesIgnoringSafeArea(.all)
     
@@ -62,9 +66,15 @@ struct ContentView : View {
                 }
             } else {
                 VStack {
-                    List {
-                        ForEach(dictations, id: \.self) {
-                            Text(($0.user == "user" ? "User: " : "Remote: ") + $0.text)
+                    if dictations.last != nil {
+                        List {
+                            ForEach(dictations, id: \.self) {
+                                $0.text != "" ? Text(($0.user == "user" ? "User: " : "Remote: ") + $0.text) : nil
+                            }
+                        }
+                    } else {
+                        List {
+                            Text("Tap Start to speak")
                         }
                     }
                 }
@@ -72,6 +82,8 @@ struct ContentView : View {
             HStack {
                 Spacer()
                 Button(action: {
+                    if recording { return }
+                    recording = true
                     title = "Listening..."
                     sr.reset()
                     sr.transcribe()
@@ -81,13 +93,23 @@ struct ContentView : View {
                         let idx = dictations.lastIndex { $0.user == "user" }
                         if let last = last {
                             if (!isFinal) {
-                                print(text)
-                                print(last.marker)
                                 if let idx = idx { dictations.remove(at: idx) }
                                 
                                 dictations.append(Dictation(time: Date(), text: Array(text.suffix(from: last.marker)).joined(separator: " "), marker: last.marker, user: "user"))
                             } else {
                                 dictations.append(Dictation(time: Date(), text: "", marker: text.count, user: "user"))
+                                
+                                Task.init {
+                                    print(last.text)
+                                    if last.text == "" { return }
+                                    dictations.append(
+                                        Dictation(
+                                            time: Date(),
+                                            text: try await ac.getResponse(prompt: last.text),
+                                            marker: 0,
+                                            user: "remote" )
+                                    )
+                                }
                             }
                         } else {
                             dictations.append(Dictation(time: Date(), text: String(text.joined(separator: " ")), marker: 0, user: "user"))
@@ -98,9 +120,12 @@ struct ContentView : View {
                 }.buttonStyle(.bordered)
                 Spacer()
                 Button(role: .destructive, action: {
+                    if !recording { return }
                     title = converter(v: selection)
                     sr.stopTranscribing()
+                    ac.reset()
                     dictations = []
+                    recording = false
                 }) {
                     Label("Stop", systemImage: "stop.circle")
                 }.buttonStyle(.bordered).buttonStyle(.bordered)
@@ -109,6 +134,7 @@ struct ContentView : View {
         }
         .onAppear() {
             self.title = converter(v: selection)
+            self.ac.change(view: selection)
         }
     }
 }

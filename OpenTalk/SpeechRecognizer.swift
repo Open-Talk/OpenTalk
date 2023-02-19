@@ -148,10 +148,8 @@ class SpeechRecognizer: ObservableObject {
             speak(result.bestTranscription.formattedString)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if (Date() - self.lastTranscription) > 1 {
-                print(Date() - self.lastTranscription)
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if (Date() - self.lastTranscription) > 2 {
                 if self.task != nil {
                     self.handler?(result?.bestTranscription.segments.map { $0.substring } ?? [], true)
                 }
